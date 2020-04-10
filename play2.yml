@@ -15,7 +15,7 @@
       route:
         service_name: "httpbin-service-get"
         hosts: "examplehttpbin.com"
-       route:
+      route:
         service_name: "spring"
         hosts: "springboot-ga.com"
     - role: kong_plugins
