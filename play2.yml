@@ -14,12 +14,10 @@
     - role: kong_route
       route:
         service_name: "httpbin-service-get"
-        hosts:
-          - "examplehttpbin.com"
+        hosts: "examplehttpbin.com"
        route:
         service_name: "spring"
-        hosts:
-          - "springboot-ga.com"
+        hosts: "springboot-ga.com"
     - role: kong_plugins
       plugins:
         service_name: "httpbin-service-get"
