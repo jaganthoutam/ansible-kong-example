@@ -28,7 +28,7 @@
     - role: kong_service
       service:
         name: "spring"
-        url: "http://192.168.5.100:30500/api/users"
+        url: "http://192.168.5.100:30500/api/user"
     - role: kong_route
       route:
         service_name: "spring"
