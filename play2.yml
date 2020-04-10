@@ -8,31 +8,40 @@
       service:
         name: "httpbin-service-get"
         url: "http://eu.httpbin.org/get"
-      service:
-        name: "spring"
-        url: "192.168.5.100:30500"
     - role: kong_route
       route:
         service_name: "httpbin-service-get"
-        hosts: "examplehttpbin.com"
-      route:
-        service_name: "spring"
-        hosts: "springboot-ga.com"
+        hosts:
+          - "examplehttpbin.com"
     - role: kong_plugins
       plugins:
         service_name: "httpbin-service-get"
         name: "key-auth"
-      plugins:
-        service_name: "spring"
-        name: "key-auth"          
     - role: kong_consumer
       consumer:
         service_name: "httpbin-service-get"
         username: "Jason"
         plugins: "key-auth"
         key: "1234"
+  # custom
+  
+    - role: kong_service
+      service:
+        name: "spring"
+        url: "http://192.168.5.100:30500/api/users"
+    - role: kong_route
+      route:
+        service_name: "spring"
+        hosts:
+          - "examplespring.com"
+    - role: kong_plugins
+      plugins:
+        service_name: "spring"
+        name: "key-auth"
+    - role: kong_consumer
       consumer:
         service_name: "spring"
-        username: "spring"
+        username: "apring"
         plugins: "key-auth"
-        key: "spring1234"
+        key: "1234"
+    
