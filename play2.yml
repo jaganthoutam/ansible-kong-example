@@ -9,7 +9,7 @@
         name: "httpbin-service-get"
         url: "http://eu.httpbin.org/get"
       service:
-        name: "apring"
+        name: "spring"
         url: "192.168.5.100:30500"
     - role: kong_route
       route:
