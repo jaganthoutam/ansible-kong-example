@@ -1,0 +1,40 @@
+---
+- hosts: localhost
+  vars:
+    KONG_ADMIN_URL: "http://{{ IPADD }}:8001"
+    KONG_JWT: ""
+  roles:
+    - role: kong_service
+      service:
+        name: "httpbin-service-get"
+        url: "http://eu.httpbin.org/get"
+      service:
+        name: "apring"
+        url: "192.168.5.100:30500"
+    - role: kong_route
+      route:
+        service_name: "httpbin-service-get"
+        hosts:
+          - "examplehttpbin.com"
+       route:
+        service_name: "spring"
+        hosts:
+          - "springboot-ga.com"
+    - role: kong_plugins
+      plugins:
+        service_name: "httpbin-service-get"
+        name: "key-auth"
+      plugins:
+        service_name: "spring"
+        name: "key-auth"          
+    - role: kong_consumer
+      consumer:
+        service_name: "httpbin-service-get"
+        username: "Jason"
+        plugins: "key-auth"
+        key: "1234"
+      consumer:
+        service_name: "spring"
+        username: "spring"
+        plugins: "key-auth"
+        key: "spring1234"
